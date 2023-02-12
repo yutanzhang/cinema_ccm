@@ -14,14 +14,16 @@
                 </el-form-item>
                 <el-form-item prop="password">
                     <label>密码</label>
-                    <el-input v-model="ruleForm.password" type="password" autocomplete="off" minlength="6" maxlength="15" />
+                    <el-input v-model="ruleForm.password" type="password" autocomplete="off" minlength="6"
+                        maxlength="15" />
                 </el-form-item>
-                <el-form-item prop="checkPass" v-show="model==='register'">
+                <el-form-item prop="checkPass" v-show="model === 'register'">
                     <label>确认密码</label>
-                    <el-input v-model.number="ruleForm.checkPass" type="password" />
+                    <el-input v-model="ruleForm.checkPass" type="password" />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" class="login-btn block" @click="submitForm(ruleFormRef)">{{ model=== 'login' ?'登录':'注册' }}</el-button>
+                    <el-button type="primary" class="login-btn block" @click="submitForm(ruleFormRef)">{{ model===
+                    'login' ? '登录' : '注册' }}</el-button>
                 </el-form-item>
             </el-form>
             <!--表单部分-->
@@ -31,7 +33,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref, onMounted } from 'vue'
-import type { FormInstance } from 'element-plus'
+import type { FormInstance, ElMessage } from 'element-plus'
 import * as ck from '../../utils/verification.js'
 import link from "../../api/link.js"
 import apiUrl from "../../api/url.js"
@@ -110,11 +112,33 @@ const submitForm = (formEl: FormInstance | undefined) => {
     formEl.validate((valid) => {
         if (valid) {
             console.log('submit!')
-
-            link(apiUrl.one).then((ok:any)=>{
-                console.log(ok)
-            })
-
+            if (model.value === "login") {
+                console.log("登录")
+            } else {
+                console.log("注册")
+                let data = {
+                    name: ruleForm.username,
+                    pwd: ruleForm.password
+                }
+                link(apiUrl.register, "post", data).then((ok: any) => {
+                    console.log(ok);
+                    if (Object.keys(ok.data).length !== 0) {
+                        ElMessage({
+                            message: '注册成功',
+                            type: 'success',
+                        });
+                        model.value = "login";
+                        menuData.forEach(v => {
+                            v.current = false
+                        });
+                        menuData[0].current = true;
+                    } else {
+                        ElMessage.error(
+                            '注册失败'
+                        )
+                    }
+                })
+            }
         } else {
             console.log('error submit!')
             return false
@@ -161,15 +185,18 @@ body,
 .demo-ruleForm {
     width: 30%;
     margin: 50px auto;
+
     label {
         display: block;
         margin-bottom: 3px;
         font-size: 14px;
     }
+
     .block {
         display: block;
         width: 100%;
     }
+
     .login-btn {
         margin-top: 20px;
     }

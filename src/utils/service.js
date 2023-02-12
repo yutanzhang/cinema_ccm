@@ -1,4 +1,5 @@
 import axios from "axios"
+import { ElMessage } from 'element-plus'
 
 let axiosurl = ""
 
@@ -28,6 +29,19 @@ service.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // 对响应错误做点什么
+    // 在接收到响应的时候先进行一些操作，在请求结果返回的时候，
+    // 先不显示信息，先对响应状态码进行一些处理，给用户提示错误信息
+    console.log(error.response.status);
+    switch(error.response.status) {
+        case 404:
+            ElMessage.error("访问路径不存在");
+            break;
+        case 500:
+            ElMessage.error("服务连接失败，请稍后再试");
+            break;
+        default:
+            ElMessage.error("未知错误！")
+    }
     return Promise.reject(error);
 });
 

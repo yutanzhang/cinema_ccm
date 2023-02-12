@@ -1,14 +1,43 @@
 {
-    "one": [
-        {"name": "ez"},
-        {
-            "name": "mf"
-        },
-        {
-            "name": "noc"
-        },
-        {
-            "name": "vn"
-        }
-    ]
+  "one": [
+    {
+      "name": "ez"
+    },
+    {
+      "name": "mf"
+    },
+    {
+      "name": "noc"
+    },
+    {
+      "name": "vn"
+    }
+  ],
+  "register": [
+    {
+      "id": 1,
+      "name": "admin@163.com",
+      "pwd": "qwer1234"
+    },
+    {
+      "name": "testOne",
+      "pwd": "qwer1234",
+      "id": 2
+    },
+    {
+      "name": "testTwo",
+      "pwd": "qwer1234",
+      "id": 3
+    },
+    {
+      "name": "testThree",
+      "pwd": "qwer1234",
+      "id": 4
+    },
+    {
+      "name": "testFour",
+      "pwd": "qwer1234",
+      "id": 5
+    }
+  ]
 }

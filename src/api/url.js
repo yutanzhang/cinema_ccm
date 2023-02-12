@@ -1,5 +1,6 @@
 let apiUrl={
-    one:"/one"
+    one: "/one",
+    register: "/register"
 }
 
 export default apiUrl
