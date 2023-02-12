@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 import type { FormInstance } from 'element-plus'
 import * as ck from '../../utils/verification.js'
 import link from "../../api/link.js"
@@ -40,6 +40,10 @@ const menuData = reactive([
     { txt: "登录", current: true, type: "login" },
     { txt: "注册", current: false, type: "register" }
 ])
+
+onMounted(() => {
+    console.log(process.env.VUE_APP_API)
+})
 
 let model = ref("login");
 
