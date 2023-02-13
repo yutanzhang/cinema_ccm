@@ -22,8 +22,9 @@
                     <el-input v-model="ruleForm.checkPass" type="password" />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" class="login-btn block" @click="submitForm(ruleFormRef)">{{ model===
-                    'login' ? '登录' : '注册' }}</el-button>
+                    <el-button :disabled="btnbool" type="primary" class="login-btn block"
+                        @click="submitForm(ruleFormRef)">{{ model===
+                        'login' ? '登录' : '注册' }}</el-button>
                 </el-form-item>
             </el-form>
             <!--表单部分-->
@@ -32,11 +33,14 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from 'vue'
+import { reactive, ref, onMounted, watch } from 'vue'
 import type { FormInstance, ElMessage } from 'element-plus'
 import * as ck from '../../utils/verification.js'
 import link from "../../api/link.js"
 import apiUrl from "../../api/url.js"
+import useMd5 from "../../hook/index.js"
+import { useRouter } from "vue-router"
+let router = useRouter();
 
 const menuData = reactive([
     { txt: "登录", current: true, type: "login" },
@@ -101,6 +105,24 @@ const ruleForm = reactive({
     checkPass: ''
 })
 
+let btnbool = ref("true");
+watch(ruleForm, (newVal, oldVal) => {
+    console.log(newVal);
+    if (model.value === "login") {
+        if (newVal.username != '' && newVal.password != '') {
+            btnbool.value = false;
+        } else {
+            btnbool.value = true;
+        }
+    } else {
+        if (newVal.username != '' && newVal.password != '' && newVal.checkPass != '') {
+            btnbool.value = false;
+        } else {
+            btnbool.value = true;
+        }
+    }
+})
+
 const rules = reactive({
     username: [{ validator: checkUser, trigger: 'blur' }],
     password: [{ validator: validatePass, trigger: 'blur' }],
@@ -114,11 +136,25 @@ const submitForm = (formEl: FormInstance | undefined) => {
             console.log('submit!')
             if (model.value === "login") {
                 console.log("登录")
+                link(apiUrl.register,"get",{},{name:ruleForm.username,pwd:useMd5(ruleForm.password).value}).then((ok:any) => {
+                    console.log(ok)
+                    if(ok.data.length!=0) {
+                        ElMessage({
+                            message: '登录成功',
+                            type: 'success',
+                        });
+                        router.push("/home")
+                    } else {
+                        ElMessage.error(
+                            '登录失败'
+                        )
+                    }
+                })
             } else {
                 console.log("注册")
                 let data = {
                     name: ruleForm.username,
-                    pwd: ruleForm.password
+                    pwd: useMd5(ruleForm.password).value
                 }
                 link(apiUrl.register, "post", data).then((ok: any) => {
                     console.log(ok);
