@@ -1,9 +1,13 @@
 <template>
     <div class="common-layout">
         <el-container>
-            <el-aside width="200px">Aside</el-aside>
+            <el-aside width="auto">
+                <LM/>
+            </el-aside>
             <el-container>
-                <el-header>Header</el-header>
+                <el-header>
+                    <RT></RT>
+                </el-header>
                 <el-main>Main</el-main>
             </el-container>
         </el-container>
@@ -11,7 +15,8 @@
 </template>
 
 <script setup>
-
+import LM from "../../components/LeftMenu.vue"
+import RT from "../../components/RightTop.vue"
 </script>
 
 <style lang="scss">
