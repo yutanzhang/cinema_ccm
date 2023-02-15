@@ -1,5 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-
+import {
+  TrendCharts,
+  Grid,
+  List
+} from '@element-plus/icons-vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
@@ -12,7 +16,56 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('../views/home/index.vue')
+    component: () => import('../views/home/index.vue'),
+    children: [
+      {
+        path: "/echarts",
+        name: "echarts",
+        component: () => import("../views/home/children/EchartsView.vue"),
+        meta: {
+          title: "数据展示",
+          icon: TrendCharts
+        }
+      },
+      {
+        path: "/pay",
+        name: "pay",
+        component: () => import("../views/home/children/PayList.vue"),
+        meta: {
+          title: "缴费管理",
+          icon: Grid
+        }
+      },
+      {
+        path: "/user",
+        name: "user",
+        component: () => import("../views/home/children/UserOne.vue"),
+        meta: {
+          title: "住户信息",
+          icon: List
+        },
+        children: [
+          {
+            path: "userList",
+            name: "userList",
+            component: () => import("../views/home/children/UserList.vue"),
+            meta: {
+              classifyTitle: "住户信息",
+              title: "住户信息列表"
+            }
+          },
+          {
+            path: "userUpdate",
+            name: "userUpdate",
+            component: () => import("../views/home/children/UserUpdate.vue"),
+            meta: {
+              classifyTitle: "住户信息",
+              title: "住户信息修改"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     path: "/",
