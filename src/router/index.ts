@@ -46,7 +46,7 @@ const routes: Array<RouteRecordRaw> = [
         },
         children: [
           {
-            path: "userList",
+            path: "/userList",
             name: "userList",
             component: () => import("../views/home/children/UserList.vue"),
             meta: {
@@ -55,7 +55,7 @@ const routes: Array<RouteRecordRaw> = [
             }
           },
           {
-            path: "userUpdate",
+            path: "/userUpdate",
             name: "userUpdate",
             component: () => import("../views/home/children/UserUpdate.vue"),
             meta: {
