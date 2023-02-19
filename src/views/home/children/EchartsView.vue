@@ -39,7 +39,7 @@ import FourVue from "@/components/Four.vue";
   .container {
     width: 100%;
     margin: 0 auto;
-    background-color: gray;
+    // background-color: gray;
     display: flex;
     .itemleft,.itemright {
         flex: 1;

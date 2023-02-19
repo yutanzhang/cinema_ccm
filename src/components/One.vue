@@ -27,6 +27,7 @@ onMounted(() => {
     ydata = data.map(v=>v.num)
 
     chartOne.setOption({
+      tooltip: {},
       xAxis: {
         type: "value",
         axisLine: {
