@@ -37,22 +37,28 @@ interface MovieListDTO {
     size: number
 }
 
-onMounted(() => {
+const currentPage = ref(1)
+const pageSize = ref(12)
+
+let refreshList = () => {
     let data = {
         current: currentPage.value,
         size: pageSize.value
     }
     store.dispatch("REFRESH_MOVIE_LIST", data)
-})
+}
 
-const currentPage = ref(1)
-const pageSize = ref(12)
+onMounted(() => {
+    refreshList();
+})
 
 const handleSizeChange = (val: number) => {
     pageSize.value = val;
+    refreshList();
 }
 const handleCurrentChange = (val: number) => {
     currentPage.value = val;
+    refreshList();
 }
 
 </script>
