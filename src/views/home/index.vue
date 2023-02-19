@@ -17,19 +17,13 @@
 </template>
 
 <script setup>
-import LM from "../../components/LeftMenu.vue"
-import RT from "../../components/RightTop.vue"
+import LM from "@/components/LeftMenu.vue"
+import RT from "@/components/RightTop.vue"
 </script>
 
 <style lang="scss">
-    .el-aside {
-        background-color: #545c64;
-    }
     .el-header {
         background-color: rgb(183, 183, 183);
-    }
-    .el-main {
-        background-color: gainsboro;
     }
     .el-aside,.el-container,.common-layout,#app,body,html {
         height: 100%;

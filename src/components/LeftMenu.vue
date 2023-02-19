@@ -1,5 +1,5 @@
 <template>
-    <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo" text-color="#fff"
+    <el-menu active-text-color="#ffd04b" class="el-menu-vertical-demo" text-color="#fff"
         :collapse="!$store.state.HomeModule.navBool" @open="handleOpen" @close="handleClose" router>
         <template v-for="v in router.options.routes[1].children" :key="v.path">
             <!-- 带下拉的导航 -->
@@ -45,6 +45,10 @@ onMounted(() => {
 
 </script>
 
-<style>
-
+<style lang="scss">
+.el-menu-vertical-demo {
+    height: 100%;
+    background-color: rgb(48,65,86);
+    // background-color="#545c64"
+}
 </style>

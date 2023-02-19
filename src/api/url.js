@@ -5,7 +5,8 @@ let apiUrl={
     chartOne: "/chartDataOne",
     chartTwo: "/chartDataTwo",
     chartThree: "/chartDataThree",
-    chartFour: "/chartDataFour"
+    chartFour: "/chartDataFour",
+    pageMovie: "/movie/pageMovie"
 }
 
 export default apiUrl

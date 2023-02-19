@@ -23,5 +23,13 @@ module.exports = defineConfig({
         resolvers: [ElementPlusResolver()],
       }),
     ],
+  },
+  devServer: {
+    proxy: {
+      '/cinema': {
+        target: 'http://localhost:9000',
+        changeOrigin: true
+      }
+    }
   }
 })

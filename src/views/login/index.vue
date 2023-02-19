@@ -7,14 +7,14 @@
                 </li>
             </ul>
             <!--表单部分-->
-            <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
+            <el-form ref="ruleFormRef" :size="size" :model="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
                 <el-form-item prop="username">
                     <label>账号</label>
-                    <el-input v-model="ruleForm.username" type="text" autocomplete="off" />
+                    <el-input :prefix-icon="User" v-model="ruleForm.username" type="text" autocomplete="off" />
                 </el-form-item>
                 <el-form-item prop="password">
                     <label>密码</label>
-                    <el-input v-model="ruleForm.password" type="password" autocomplete="off" minlength="6"
+                    <el-input :prefix-icon="Lock" v-model="ruleForm.password" type="password" autocomplete="off" minlength="6"
                         maxlength="15" />
                 </el-form-item>
                 <el-form-item prop="checkPass" v-show="model === 'register'">
@@ -40,6 +40,7 @@ import link from "../../api/link.js"
 import apiUrl from "../../api/url.js"
 import useMd5 from "../../hook/index.js"
 import { useRouter } from "vue-router"
+import { User, Lock } from '@element-plus/icons-vue'
 let router = useRouter();
 
 const menuData = reactive([
@@ -64,6 +65,8 @@ let clickMenu = (item: any) => {
 
 // elementplus 表单部分
 const ruleFormRef = ref<FormInstance>()
+const size = ref('large')
+const labelPosition = ref("top")
 
 const checkUser = (rule: any, value: any, callback: any) => {
     if (!value) {
@@ -136,9 +139,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
             console.log('submit!')
             if (model.value === "login") {
                 console.log("登录")
-                link(apiUrl.register,"get",{},{name:ruleForm.username,pwd:useMd5(ruleForm.password).value}).then((ok:any) => {
+                link(apiUrl.register, "get", {}, { name: ruleForm.username, pwd: useMd5(ruleForm.password).value }).then((ok: any) => {
                     console.log(ok)
-                    if(ok.data.length!=0) {
+                    if (ok.data.length != 0) {
                         ElMessage({
                             message: '登录成功',
                             type: 'success',
@@ -193,6 +196,12 @@ const resetForm = (formEl: FormInstance | undefined) => {
 <style lang="scss">
 .login {
     height: 100%;
+    background-color: rgb(45, 58, 75);
+    overflow: hidden;
+
+    .login-con {
+        margin-top: 150px;
+    }
 }
 
 html,
@@ -209,7 +218,7 @@ body,
         width: 88px;
         line-height: 36px;
         font-size: 14px;
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         border-radius: 2px;
     }
 
@@ -221,6 +230,7 @@ body,
 .demo-ruleForm {
     width: 30%;
     margin: 50px auto;
+    color: rgb(255, 255, 255);
 
     label {
         display: block;

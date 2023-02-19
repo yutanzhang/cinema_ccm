@@ -43,16 +43,6 @@ const handleCurrentChange = (val: number) => {
   currentPage4.value = val;
 }
 
-let tableData = reactive({
-  listdata: []
-})
-
-let initUserList = () => {
-  link(apiUrl.userList).then((ok: any) => {
-    console.log(ok)
-    tableData.listdata = ok.data
-  })
-}
 onMounted(
   ()=>{
     store.dispatch("USERUPDATE_LIST")

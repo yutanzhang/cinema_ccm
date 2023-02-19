@@ -1,16 +1,16 @@
 <template>
     <div>
         <el-icon @click="ck">
-            <CaretRight v-if="$store.state.HomeModule.navBool" />
-            <CaretLeft v-else />
+            <Expand v-if="$store.state.HomeModule.navBool" />
+            <Fold v-else />
         </el-icon>
     </div>
 </template>
 
 <script setup>
 import {
-    CaretRight,
-    CaretLeft
+    Expand,
+    Fold
 } from '@element-plus/icons-vue'
 // import { ref } from "vue"
 // let bool = ref(true)

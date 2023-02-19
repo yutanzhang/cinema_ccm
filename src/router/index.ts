@@ -64,6 +64,15 @@ const routes: Array<RouteRecordRaw> = [
             }
           }
         ]
+      },
+      {
+        path: "/movie",
+        name: "movie",
+        component: () => import("../views/home/movie/MovieList.vue"),
+        meta: {
+          title: "影片列表",
+          icon: List
+        }
       }
     ]
   },
