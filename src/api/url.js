@@ -6,7 +6,11 @@ let apiUrl={
     chartTwo: "/chartDataTwo",
     chartThree: "/chartDataThree",
     chartFour: "/chartDataFour",
-    pageMovie: "/movie/pageMovie"
+    pageMovie: "/movie/pageMovie",
+    movie: {
+        pageMovie: "/movie/pageMovie",
+        updateMovie: "/movie/updateMovie"
+    }
 }
 
 export default apiUrl

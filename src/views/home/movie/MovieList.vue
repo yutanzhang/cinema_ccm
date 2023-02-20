@@ -33,6 +33,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import UpdateDialog from "@/components/movie/UpdateDialog.vue"
+
 let store = useStore();
 
 // 表格数据加载
@@ -77,8 +79,7 @@ interface User {
   address: string
 }
 const handleEdit = (index: number, row: User) => {
-  console.log(index, row)
-  store.commit("SET_DIALOG",row)
+  store.commit("EDIT_MOVIE",row)
 }
 
 const handleDelete = (index: number, row: User) => {
