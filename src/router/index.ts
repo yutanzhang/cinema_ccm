@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import {
   TrendCharts,
   Grid,
-  List
+  List,
+  Folder
 } from '@element-plus/icons-vue'
 const routes: Array<RouteRecordRaw> = [
   {
@@ -72,6 +73,15 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: "影片列表",
           icon: List
+        }
+      },
+      {
+        path: "/category",
+        name: "category",
+        component: () => import("../views/home/movie/Category.vue"),
+        meta: {
+          title: "分类详情",
+          icon: Folder
         }
       }
     ]

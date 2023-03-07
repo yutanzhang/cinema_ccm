@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import HomeModule from './modules/HomeModule'
 import MovieModule from "./modules/MovieModule"
+import CategoryModule from './modules/CategoryModule'
 
 export default createStore({
   state: {
@@ -13,6 +14,7 @@ export default createStore({
   },
   modules: {
     HomeModule,
-    MovieModule
+    MovieModule,
+    CategoryModule
   }
 })

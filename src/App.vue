@@ -1,12 +1,12 @@
 <template>
   <!--路由出口-->
-  <router-view/>
+  <router-view />
 </template>
 
 <script setup>
 import * as echarts from "echarts"
-import {provide} from "vue"
-provide("echarts",echarts)
+import { provide } from "vue"
+provide("echarts", echarts)
 </script>
 
 

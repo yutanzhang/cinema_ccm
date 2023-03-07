@@ -10,6 +10,9 @@ let apiUrl={
     movie: {
         pageMovie: "/movie/pageMovie",
         updateMovie: "/movie/updateMovie"
+    },
+    category: {
+        listCategory: "/category/listCategory",
     }
 }
 

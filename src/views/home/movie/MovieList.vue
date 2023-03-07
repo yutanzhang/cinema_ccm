@@ -1,4 +1,5 @@
-<template><!-- 列表 -->
+<template>
+    <!-- 列表 -->
     <div>
         <el-table :data="$store.state.MovieModule.movieList.records" style="width: 100%" size="large" stripe
             :header-cell-style="headerRowStyle" :cell-style="cellStyle">
@@ -21,19 +22,19 @@
             </el-table-column>
         </el-table>
     </div>
-    <br/>
+    <br />
     <!-- 分页 -->
     <el-pagination background v-model:current-page="currentPage" v-model:page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper" :total="$store.state.MovieModule.movieList.total"
         @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     <!-- 修改弹出框 -->
-    <UpdateDialog />
+    <UpdateDrawer />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import UpdateDialog from "@/components/movie/UpdateDialog.vue"
+import UpdateDrawer from "@/components/movie/UpdateDrawer.vue";
 
 let store = useStore();
 
@@ -74,17 +75,17 @@ const handleCurrentChange = (val: number) => {
 
 // 表格操作
 interface User {
-  date: string
-  name: string
-  address: string
+    date: string
+    name: string
+    address: string
 }
 const handleEdit = (index: number, row: User) => {
-  store.commit("EDIT_MOVIE",row)
+    store.commit("EDIT_MOVIE", row)
 }
 
 const handleDelete = (index: number, row: User) => {
-  console.log(index, row),
-  store.dispatch("DEL_DIALOG",row)
+    console.log(index, row),
+        store.dispatch("DEL_DIALOG", row)
 }
 // 表格操作
 
